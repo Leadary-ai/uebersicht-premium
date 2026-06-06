@@ -34,11 +34,27 @@
   .meta{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;font-size:14px;color:var(--muted)}
   .meta b{color:var(--fg);font-weight:600;margin-right:6px}
   .meta .sep{width:3px;height:3px;border-radius:50%;background:var(--border-strong)}
-  .link{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--muted);text-decoration:none}
+  .link{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--muted);text-decoration:none}
   .link:hover{color:var(--fg)}
-  .link svg{width:13px;height:13px}
+  .link svg{width:13px;height:13px;transition:transform .15s}
+  .link:hover svg{transform:translate(2px,-2px)}
 
-  .rule{height:1px;background:var(--border);margin:30px 0 26px}
+  /* HERO card */
+  .hero{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:38px 42px;margin-bottom:28px}
+  .hero-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:999px;
+          padding:6px 13px;font-size:12px;font-weight:500;color:var(--muted)}
+  .status .dot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--up)}
+  .status .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(26,138,85,.16)}
+  .hero h1.hello{margin-top:22px;font-size:40px;line-height:1.02;color:var(--fg)}
+  .hero h1.hello .dotchar{color:var(--muted)}
+  .hero-sub{margin-top:14px;font-size:15px;color:var(--muted);line-height:1.55;max-width:48ch}
+  .hero-foot{margin-top:28px;padding-top:24px;border-top:1px solid var(--border);
+             display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .hstats{display:flex;align-items:center;gap:24px}
+  .hstat .k{font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--label)}
+  .hstat .v{font-size:15px;font-weight:600;margin-top:5px}
+  .hdiv{width:1px;height:32px;background:var(--border)}
 
   /* PERIOD — light segmented */
   .seg{display:inline-flex;gap:2px;background:#eef0f3;border-radius:10px;padding:3px}
@@ -88,18 +104,24 @@
 <div class="wrap">
 
   <!-- HERO -->
-  <div class="eyebrow">Samstag, 6. Juni</div>
-  <h1 class="hello">Willkommen zurück, <span class="muted">Elias.</span></h1>
-  <div class="meta">
-    <span><b>Tarif</b>Scale</span>
-    <span class="sep"></span>
-    <span><b>Anwendungsbereich</b>Vertrieb</span>
-  </div>
-  <a class="link" href="#">Tarif wechseln oder Anwendungsbereich erweitern
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
-  </a>
-
-  <div class="rule"></div>
+  <section class="hero">
+    <div class="hero-top">
+      <div class="eyebrow">Samstag, 6. Juni</div>
+      <span class="status"><span class="dot"></span>Assistent aktiv</span>
+    </div>
+    <h1 class="hello">Willkommen zurück, Elias<span class="dotchar">.</span></h1>
+    <p class="hero-sub">Dein KI-Telefonassistent ist aktiv und nimmt Anrufe entgegen. Hier ist dein aktueller Überblick.</p>
+    <div class="hero-foot">
+      <div class="hstats">
+        <div class="hstat"><div class="k">Tarif</div><div class="v">Scale</div></div>
+        <div class="hdiv"></div>
+        <div class="hstat"><div class="k">Anwendungsbereich</div><div class="v">Vertrieb</div></div>
+      </div>
+      <a class="link" href="#">Tarif wechseln oder erweitern
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+  </section>
 
   <!-- PERIOD -->
   <div class="seg">
