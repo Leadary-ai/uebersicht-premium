@@ -57,15 +57,15 @@
   .seg button.active{background:#fff;color:var(--fg);box-shadow:0 1px 2px rgba(19,22,27,.07)}
   .seg button:not(.active):hover{color:var(--fg)}
 
-  /* KPIs — flat, hairline */
-  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
-  .kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 20px 18px;transition:border-color .15s}
-  .kpi:hover{border-color:var(--border-strong)}
-  .kpi .label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--label)}
-  .kpi .val{font-size:30px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-top:16px}
-  .kpi .val small{font-size:17px;color:var(--muted);font-weight:500}
-  .kpi .delta{font-size:12px;color:var(--muted);margin-top:11px}
-  .kpi .delta .up{color:var(--up);font-weight:600}
+  /* KPIs — eine ruhige Leiste statt vieler Kästchen */
+  .stats{display:flex;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-top:18px}
+  .stat{flex:1;padding:24px 26px}
+  .stat + .stat{border-left:1px solid var(--border)}
+  .stat .label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--label)}
+  .stat .val{font-size:31px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-top:15px}
+  .stat .val small{font-size:17px;color:var(--muted);font-weight:500}
+  .stat .delta{font-size:12px;color:var(--muted);margin-top:11px}
+  .stat .delta .up{color:var(--up);font-weight:600}
 
   /* CHART — clean */
   .chart{margin-top:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 26px 20px}
@@ -88,7 +88,12 @@
   .xax span{flex:1;text-align:center;font-size:9.5px;color:var(--label);font-variant-numeric:tabular-nums}
   .caption{text-align:center;margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--label)}
 
-  @media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}h1.hello{font-size:28px}}
+  @media(max-width:820px){
+    .stats{flex-direction:column}
+    .stat + .stat{border-left:0;border-top:1px solid var(--border)}
+    .hero h1.hello{font-size:29px}
+    .hero{padding:32px 26px}
+  }
 </style>
 </head>
 <body>
@@ -119,23 +124,18 @@
   </div>
 
   <!-- KPIs -->
-  <div class="kpis">
-    <div class="kpi">
+  <div class="stats">
+    <div class="stat">
       <div class="label">Angenommene Anrufe</div>
       <div class="val tabnum">12</div>
       <div class="delta"><span class="up">↑ 18 %</span> &nbsp;vs. Vorwoche</div>
     </div>
-    <div class="kpi">
-      <div class="label">Vereinbarte Termine</div>
-      <div class="val tabnum">5</div>
-      <div class="delta"><span class="up">↑ 25 %</span> &nbsp;vs. Vorwoche</div>
-    </div>
-    <div class="kpi">
+    <div class="stat">
       <div class="label">Gesprächsminuten</div>
       <div class="val tabnum">33<small> Min</small></div>
       <div class="delta"><span class="up">↑ 12 %</span> &nbsp;vs. Vorwoche</div>
     </div>
-    <div class="kpi">
+    <div class="stat">
       <div class="label">~ Eingesparte Kosten</div>
       <div class="val tabnum">23,66<small> €</small></div>
       <div class="delta"><span class="up">↑ 21 %</span> &nbsp;vs. Vorwoche</div>
