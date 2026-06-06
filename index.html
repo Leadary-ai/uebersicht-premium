@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Übersicht — Premium-Entwurf · Leadary</title>
+<style>
+  :root{
+    --brand:#1C3CA7; --brand-2:#4257B5; --brand-3:#7184C7;
+    --brand-soft:#EAF0FF; --brand-chip:#E8ECF6;
+    --bg:#f4f5f7; --card:#ffffff;
+    --fg:#0f1115; --muted:#6b7280; --label:#9aa1ac;
+    --border:#ecedf1; --success:#1aa35a;
+    --r:18px;
+    --sh-sm:0 1px 2px rgba(16,17,20,.04);
+    --sh:0 1px 2px rgba(16,17,20,.04), 0 10px 30px -14px rgba(16,17,20,.14);
+    --sh-lift:0 2px 4px rgba(16,17,20,.05), 0 18px 40px -16px rgba(28,60,167,.22);
+  }
+  *{box-sizing:border-box}
+  html{font-size:15px}
+  body{
+    margin:0;background:var(--bg);color:var(--fg);
+    font-family:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;letter-spacing:-.006em;
+    background-image:radial-gradient(900px 420px at 100% -5%, #eef1fb 0%, transparent 55%);
+    background-attachment:fixed;
+  }
+  h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em}
+  .tabnum{font-variant-numeric:tabular-nums}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 26px 90px}
+
+  .note{margin:0 auto 16px;max-width:1000px;padding:0 26px}
+  .note-in{background:var(--brand-soft);border:1px solid #d9e0fb;border-radius:12px;padding:11px 15px;font-size:12.5px;color:#26408f}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;border-radius:24px;background:var(--card);
+        border:1px solid var(--border);box-shadow:var(--sh);padding:42px 44px}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(640px 300px at 96% -30%, rgba(28,60,167,.14), transparent 62%),
+      radial-gradient(420px 220px at -8% 130%, rgba(15,17,21,.05), transparent 60%);}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(28,60,167,.35) 30%,rgba(28,60,167,.35) 70%,transparent)}
+  .eyebrow{position:relative;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .hero h1{position:relative;margin-top:14px;font-size:38px;line-height:1.02;font-weight:600}
+  .hero h1 .name{background:linear-gradient(120deg,var(--brand),var(--brand-2) 60%,var(--brand-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h1 .dot{color:var(--brand-3)}
+  .chips{position:relative;display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:#fbfbfd;border:1px solid var(--border);
+        border-radius:999px;padding:7px 14px;font-size:13px;box-shadow:var(--sh-sm)}
+  .chip .k{color:var(--muted)}
+  .chip .v{font-weight:600;color:var(--fg)}
+  .chip .d{width:6px;height:6px;border-radius:50%;background:var(--brand)}
+  .hlink{position:relative;display:inline-flex;align-items:center;gap:6px;margin-top:18px;
+         font-size:13.5px;color:var(--muted);text-decoration:none;transition:color .15s}
+  .hlink:hover{color:var(--brand)}
+  .hlink svg{width:14px;height:14px;transition:transform .15s}
+  .hlink:hover svg{transform:translate(2px,-2px)}
+
+  /* ---------- PERIOD ---------- */
+  .seg{display:inline-flex;gap:4px;background:#fff;border:1px solid var(--border);border-radius:999px;
+       padding:5px;margin-top:26px;box-shadow:var(--sh-sm)}
+  .seg button{border:0;background:transparent;font:inherit;font-size:13px;font-weight:500;color:var(--muted);
+              padding:8px 18px;border-radius:999px;cursor:pointer;transition:.18s}
+  .seg button.active{background:var(--brand);color:#fff;box-shadow:0 6px 16px -6px rgba(28,60,167,.5)}
+  .seg button:not(.active):hover{color:var(--fg);background:#f3f4f7}
+
+  /* ---------- KPIs ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+  .kpi{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+       padding:20px 20px 18px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s}
+  .kpi:hover{transform:translateY(-3px);box-shadow:var(--sh-lift)}
+  .kpi-top{display:flex;align-items:center;justify-content:space-between}
+  .chipico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+           background:linear-gradient(135deg,#eef1fb,#e3e9fa);color:var(--brand)}
+  .chipico svg{width:19px;height:19px;stroke-width:1.7}
+  .kpi-delta{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:600;color:var(--success);
+             background:#e8f6ee;border-radius:999px;padding:3px 9px}
+  .kpi-delta svg{width:11px;height:11px}
+  .kpi-label{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:18px}
+  .kpi-val{font-size:32px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-top:9px}
+  .kpi-val small{font-size:18px;color:var(--muted);font-weight:500}
+
+  /* ---------- CHART ---------- */
+  .chart{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+         box-shadow:var(--sh);padding:24px 26px 22px}
+  .chart-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px}
+  .chart-head h3{font-size:16px}
+  .chart-head .mon{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--label)}
+  .plot{display:flex;gap:10px}
+  .yax{display:flex;flex-direction:column;justify-content:space-between;height:230px;padding-top:4px;padding-bottom:26px;
+       font-size:10.5px;color:var(--label);text-align:right;min-width:18px}
+  .grid-area{flex:1;position:relative}
+  .bars{position:relative;height:230px}
+  .gl{position:absolute;left:0;right:0;border-top:1px solid #f1f2f6}
+  .row{position:absolute;left:0;right:0;bottom:26px;top:4px;display:flex;align-items:flex-end;gap:4px}
+  .bcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+  .bval{font-size:10px;font-weight:600;color:var(--brand);margin-bottom:5px}
+  .bar{width:100%;max-width:15px;border-radius:6px 6px 3px 3px;
+       background:linear-gradient(180deg,var(--brand) 0%,var(--brand-2) 55%,#8fa0d8 100%);
+       transition:filter .15s,transform .15s;cursor:default}
+  .bar.empty{background:#eef0f5}
+  .bcol:hover .bar:not(.empty){filter:brightness(1.08);transform:scaleY(1.02)}
+  .xax{display:flex;gap:4px;margin-top:8px}
+  .xax span{flex:1;text-align:center;font-size:9.5px;color:var(--label)}
+  .caption{text-align:center;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--label)}
+
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}.hero{padding:32px 26px}.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+
+<div class="note"><div class="note-in">✨ <b>Premium-Entwurf</b> der Übersicht — nur zur Ansicht, nicht das echte Dashboard. Beispieldaten.</div></div>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Samstag, 6. Juni</div>
+    <h1>Willkommen zurück, <span class="name">Elias</span><span class="dot">.</span></h1>
+    <div class="chips">
+      <span class="chip"><span class="d"></span><span class="k">Tarif</span><span class="v">Scale</span></span>
+      <span class="chip"><span class="d"></span><span class="k">Anwendungsbereich</span><span class="v">Vertrieb</span></span>
+    </div>
+    <a class="hlink" href="#">Tarif wechseln oder Anwendungsbereich erweitern
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+    </a>
+  </section>
+
+  <!-- PERIOD -->
+  <div class="seg">
+    <button>Heute</button>
+    <button class="active">Diese Woche</button>
+    <button>Dieser Monat</button>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="chipico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1.05.36 2.07.7 3a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.96.34 1.97.57 3 .7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <span class="kpi-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>18 %</span>
+      </div>
+      <div class="kpi-label">Angenommene Anrufe</div>
+      <div class="kpi-val tabnum">12</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="chipico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M16 2.5v4M8 2.5v4M3 10h18M9 15l2 2 4-4"/></svg></div>
+        <span class="kpi-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>25 %</span>
+      </div>
+      <div class="kpi-label">Vereinbarte Termine</div>
+      <div class="kpi-val tabnum">5</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="chipico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3 2"/></svg></div>
+        <span class="kpi-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>12 %</span>
+      </div>
+      <div class="kpi-label">Gesprächsminuten</div>
+      <div class="kpi-val tabnum">33<small> Min</small></div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="chipico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.6 9.2c-.4-.9-1.3-1.4-2.6-1.4-1.4 0-2.5.7-2.5 1.8 0 2.7 5 1.3 5 4 0 1.1-1.1 1.9-2.5 1.9-1.3 0-2.2-.6-2.6-1.5M12 6v1.6M12 16.4V18"/></svg></div>
+        <span class="kpi-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>21 %</span>
+      </div>
+      <div class="kpi-label">~ Eingesparte Kosten</div>
+      <div class="kpi-val tabnum">23,66<small> €</small></div>
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div class="chart">
+    <div class="chart-head">
+      <h3>Anrufvolumen · Aktueller Monat</h3>
+      <span class="mon">Juni 2026</span>
+    </div>
+    <div class="plot">
+      <div class="yax"><span>60</span><span>40</span><span>20</span><span>0</span></div>
+      <div class="grid-area">
+        <div class="bars" id="bars"></div>
+        <div class="xax" id="xax"></div>
+      </div>
+    </div>
+    <div class="caption">Tag im Monat · Juni 2026</div>
+  </div>
+</div>
+
+<script>
+  const DAYS = 30, SCALE = 60;
+  // Beispiel: Tag 2 = 5, Tag 3 = 6, Tag 4 = 1
+  const data = Array.from({length:DAYS},(_,i)=>({day:i+1, n: i===1?5 : i===2?6 : i===3?1 : 0}));
+
+  // Gitterlinien
+  const bars = document.getElementById('bars');
+  [60,40,20,0].forEach(t=>{
+    const gl=document.createElement('div');
+    gl.className='gl';
+    gl.style.top=`calc(${(1-t/SCALE)*100}% * (230 - 30)/230 + 4px)`;
+    gl.style.top=`${4 + (1-t/SCALE)*(230-4-26)}px`;
+    bars.appendChild(gl);
+  });
+  // Balken-Reihe
+  const row=document.createElement('div'); row.className='row';
+  data.forEach(d=>{
+    const col=document.createElement('div'); col.className='bcol';
+    const h=(d.n/SCALE)*100;
+    col.innerHTML = (d.n>0?`<span class="bval">${d.n}</span>`:'') +
+      `<div class="bar ${d.n===0?'empty':''}" style="height:${d.n>0?h:1.5}%" title="${d.day}. Juni · ${d.n} Anruf${d.n===1?'':'e'}"></div>`;
+    row.appendChild(col);
+  });
+  bars.appendChild(row);
+  // X-Achse
+  const xax=document.getElementById('xax');
+  data.forEach(d=>{ const s=document.createElement('span'); s.textContent=d.day; xax.appendChild(s); });
+</script>
+</body>
+</html>
